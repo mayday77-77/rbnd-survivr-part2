@@ -17,7 +17,7 @@ class Jury
 		# Looping the member array to cast randomly their votes into the array and printing the jury to stdout
 		@members.each do | each_member | 
 			votes[votes.to_a.sample[0]] += 1
-			puts each_member
+			puts each_member # why does this appear on screen?
 		end
 		return votes
 	end
@@ -27,7 +27,7 @@ class Jury
 	end
 
 	def announce_winner(input_votes)
-		input_votes.first
+		input_votes.to_a.first[0]
 	end
 
 	# Initialize the 2 finalists with vote counts in a hash
