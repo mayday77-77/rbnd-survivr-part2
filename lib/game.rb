@@ -11,8 +11,9 @@ class Game
 		@tribes << input_tribe
 	end
 
+	# Return the tribe which loses randomly
 	def immunity_challenge
-		@tribes.first
+		@tribes.sample
 	end
 
 	def clear_tribes
@@ -29,6 +30,12 @@ class Game
 	# Just to pass the test to return a contestant type
 	def individual_immunity_challenge
 		@tribes.first.members.sample
+	end
+
+	# added function to reset the Game after different phases
+	def reset_tribe(input_tribe)
+		clear_tribes
+		add_tribe(input_tribe)
 	end
 
 end

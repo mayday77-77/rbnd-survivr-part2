@@ -12,12 +12,16 @@ class Tribe
 		@name
 	end
 
-	# return value must not be the immune contestant
+	# return a contestant
 	def tribal_council(input_immune_contestant) 
-		begin
-			random_member = @members.sample
-		end while random_member == input_immune_contestant[:immune]		
-		return random_member
+		if input_immune_contestant[:immune] # if immune member is provided
+			resultant_member = @members.reject {|each_member| each_member == input_immune_contestant[:immune]}.sample
+			@members.delete(resultant_member)
+		else # else if no immune member provided - phase 1
+			resultant_member = @members.sample
+			@members.delete(resultant_member)
+		end
+		return resultant_member
 	end
 
 end

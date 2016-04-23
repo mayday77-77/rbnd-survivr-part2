@@ -27,7 +27,9 @@ class Jury
 	end
 
 	def announce_winner(input_votes)
-		input_votes.to_a.first[0]
+		winner = input_votes.to_a.first[1] > input_votes.to_a.last[1] ? input_votes.to_a.first[0] : input_votes.to_a.last[0]
+		puts "Winner is #{winner}!"
+		return winner
 	end
 
 	# Initialize the 2 finalists with vote counts in a hash
