@@ -17,7 +17,7 @@ class Jury
 		# Looping the member array to cast randomly their votes into the array and printing the jury to stdout
 		@members.each do | each_member | 
 			votes[votes.to_a.sample[0]] += 1
-			puts "#{each_member}".pink # why does this appear on screen?
+			puts "#{each_member}".pink + " ===> Voted XX"
 		end
 		return votes
 	end
@@ -29,7 +29,7 @@ class Jury
 	def announce_winner(input_votes)
 		# check to see if this could be refactored
 		winner = input_votes.to_a.first[1] > input_votes.to_a.last[1] ? input_votes.to_a.first[0] : input_votes.to_a.last[0]
-		puts "Winner is #{winner.yellow}!"
+		puts "Winner is #{winner}!".yellow
 		return winner
 	end
 

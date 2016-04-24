@@ -2,7 +2,7 @@ require_relative "game"
 require_relative "tribe"
 require_relative "contestant"
 require_relative "jury"
-require 'colorizr'
+require_relative "colorizr"
 
 #After your tests pass, uncomment this code below
 #=========================================================
