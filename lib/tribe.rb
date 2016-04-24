@@ -4,8 +4,8 @@ class Tribe
 
 	def initialize(input_tribe_hash)
 		@name = input_tribe_hash[:name]
-		puts to_s
 		@members = input_tribe_hash[:members] # array of 10 contestants
+		print_tribe_name
 	end
 
 	def to_s
@@ -22,6 +22,16 @@ class Tribe
 			@members.delete(resultant_member)
 		end
 		return resultant_member
+	end
+
+	# Added to output the tribe details to screen with colorizr
+	def print_tribe_name
+		puts "\nParticipating Tribe: #{@name.blue}"
+	end
+
+	def print_members
+		print "Members: "
+		@members.each {|each_member| print "#{each_member} ".green}
 	end
 
 end

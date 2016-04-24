@@ -17,18 +17,19 @@ class Jury
 		# Looping the member array to cast randomly their votes into the array and printing the jury to stdout
 		@members.each do | each_member | 
 			votes[votes.to_a.sample[0]] += 1
-			puts each_member # why does this appear on screen?
+			puts "#{each_member}".pink # why does this appear on screen?
 		end
 		return votes
 	end
 
 	def report_votes(input_votes)
-		input_votes.each { |each_name,each_vote | puts "#{each_name} => #{each_vote}"}
+		input_votes.each { |each_name,each_vote | puts "#{each_name.yellow} => #{each_vote}"}
 	end
 
 	def announce_winner(input_votes)
+		# check to see if this could be refactored
 		winner = input_votes.to_a.first[1] > input_votes.to_a.last[1] ? input_votes.to_a.first[0] : input_votes.to_a.last[0]
-		puts "Winner is #{winner}!"
+		puts "Winner is #{winner.yellow}!"
 		return winner
 	end
 
@@ -37,6 +38,10 @@ class Jury
 		finalist_hash = Hash.new
 		input_finalist_array.each {| finalist_name | finalist_hash["#{finalist_name}"] = 0 } 
 		return finalist_hash
+	end
+
+	def print_members
+		@members.each {|each_member| print "#{each_member} ".pink}
 	end
 
 end
