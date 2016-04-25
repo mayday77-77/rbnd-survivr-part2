@@ -1,3 +1,4 @@
+require_relative "colorizr"
 class Jury
 
 	attr_accessor :members
@@ -17,19 +18,20 @@ class Jury
 		# Looping the member array to cast randomly their votes into the array and printing the jury to stdout
 		@members.each do | each_member | 
 			votes[votes.to_a.sample[0]] += 1
-			puts "#{each_member}".pink + " ===> Voted XX"
+			puts "#{each_member}".pink + " ==> Voted X".rjust(25-each_member.name.length)
 		end
 		return votes
 	end
 
+	# Report the count of votes for the finalists
 	def report_votes(input_votes)
-		input_votes.each { |each_name,each_vote | puts "#{each_name.yellow} => #{each_vote}"}
+		input_votes.each { |each_name,each_vote | puts "#{each_name.yellow}" + " => votes: #{each_vote}".rjust(25-each_name.length)}
 	end
 
 	def announce_winner(input_votes)
-		# check to see if this could be refactored
+		# Check to see which member has more votes and return the one with more
 		winner = input_votes.to_a.first[1] > input_votes.to_a.last[1] ? input_votes.to_a.first[0] : input_votes.to_a.last[0]
-		puts "Winner is #{winner}!".yellow
+		puts "Survior Game Winner is #{winner}!".yellow
 		return winner
 	end
 
@@ -40,6 +42,7 @@ class Jury
 		return finalist_hash
 	end
 
+	# Added to print the names of the jury to screen
 	def print_members
 		@members.each {|each_member| print "#{each_member} ".pink}
 	end

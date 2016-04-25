@@ -1,3 +1,4 @@
+require_relative "colorizr"
 class Tribe
 
 	attr_accessor :name, :members
@@ -29,6 +30,7 @@ class Tribe
 		puts "\nParticipating Tribe: #{@name.blue}"
 	end
 
+	# Added to print the members of the tribe to screen
 	def print_members
 		print "Members: "
 		@members.each {|each_member| print "#{each_member} ".green}

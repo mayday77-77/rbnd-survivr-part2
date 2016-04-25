@@ -30,8 +30,7 @@ def phase_one
 	voted_out = @borneo.immunity_challenge.tribal_council(no_immune: nil) # Returns the voted out member
 	voted_out_array << voted_out 
 	end
-	puts "Eliminated Members after 8 rounds from both tribes:"
-	voted_out_array.each {|loser| print "#{loser} ".red}
+	print_losers(voted_out_array)
 	voted_out_array.length 
 end
 
@@ -39,25 +38,37 @@ end
 def phase_two
 	voted_out_array = Array.new
 	@borneo.reset_tribe(@merge_tribe) # recreate a new game with the new tribe
-	3.times do
-	winner = @borneo.individual_immunity_challenge # pick the winner
+	puts "\n\nGame details:"
+	for rounds in 1..3 do
+	winner = @borneo.individual_immunity_challenge # Random winner for each individual round
 	voted_out = @merge_tribe.tribal_council(immune: winner) # returns the voted out member
 	voted_out_array << voted_out
+	print_phase_details(winner,voted_out,rounds)
 	end
-	puts "\n\nEliminated Members after 3 individual rounds:"
-	voted_out_array.each {|loser| print "#{loser} ".red}
+	print_losers(voted_out_array)
 	voted_out_array.length
 end
 
 # Phase 3 is to return the number of eliminated contestants which is the jury as well
 def phase_three
 	@borneo.reset_tribe(@merge_tribe) # recreate a new game with the new tribe
-	7.times do
-	winner = @borneo.individual_immunity_challenge # pick the winner
+	puts "\n\nGame details:"
+	for rounds in 1..7 do
+	winner = @borneo.individual_immunity_challenge # # Random winner for each individual round
 	voted_jury = @merge_tribe.tribal_council(immune: winner) # returns loser as jury
 	@jury.add_member(voted_jury)
+	print_phase_details(winner,voted_jury,rounds)
 	end
 	@jury.members.length
+end
+
+def print_phase_details(winner, voted_out, round_number)
+	puts "Round #{round_number}: Immune Winner => " + "#{winner}".yellow + ", Eliminated => " + "#{voted_out}".red
+end
+
+def print_losers(voted_out_array)
+	puts "\nEliminated Members after individual rounds:"
+	voted_out_array.each {|loser| print "#{loser} ".red}
 end
 
 
@@ -74,7 +85,7 @@ phase_two #3 more eliminations
 
 puts "\n\nPhase 3\n===========\n" # Phase 3 header
 @jury = Jury.new
-puts "Final members left for last round of #{@borneo.tribes.first.name.blue} tribe"
+puts "Final members of #{@borneo.tribes.first.name.blue} tribe for last round"
 @merge_tribe.print_members
 phase_three #7 elminiations become jury members
 puts "\n\nEliminated members after 7 challenges assigned to Jury:"
@@ -84,9 +95,10 @@ puts "\n\nFinalists:"
 finalists.each {|each_finalist| print "#{each_finalist} ".yellow}
 
 puts"\n\nFinal Tribal Council\n======================"
-puts"Jury casting their votes 1 by 1:"
+puts"Jury casting their votes:"
 vote_results = @jury.cast_votes(finalists) #Jury members report votes
 puts"\nResults of Votes:"
 @jury.report_votes(vote_results) #Jury announces their votes
 puts"\nWinner Announcement:"
 @jury.announce_winner(vote_results) #Jury announces final winner
+puts"\n========================"
