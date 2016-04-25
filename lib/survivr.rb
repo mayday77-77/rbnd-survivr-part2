@@ -1,8 +1,9 @@
+require 'bundler/setup'
+require 'colorizr'
 require_relative "game"
 require_relative "tribe"
 require_relative "contestant"
 require_relative "jury"
-require_relative "colorizr"
 
 #After your tests pass, uncomment this code below
 #=========================================================
@@ -41,7 +42,7 @@ def phase_two
 	puts "\n\nGame details:"
 	for rounds in 1..3 do
 	winner = @borneo.individual_immunity_challenge # Random winner for each individual round
-	voted_out = @merge_tribe.tribal_council(immune: winner) # returns the voted out member
+	voted_out = @borneo.tribes.first.tribal_council(immune: winner) # returns the voted out member
 	voted_out_array << voted_out
 	print_phase_details(winner,voted_out,rounds)
 	end
@@ -55,7 +56,7 @@ def phase_three
 	puts "\n\nGame details:"
 	for rounds in 1..7 do
 	winner = @borneo.individual_immunity_challenge # # Random winner for each individual round
-	voted_jury = @merge_tribe.tribal_council(immune: winner) # returns loser as jury
+	voted_jury = @borneo.tribes.first.tribal_council(immune: winner) # returns loser as jury
 	@jury.add_member(voted_jury)
 	print_phase_details(winner,voted_jury,rounds)
 	end
@@ -86,7 +87,7 @@ phase_two #3 more eliminations
 puts "\n\nPhase 3\n===========\n" # Phase 3 header
 @jury = Jury.new
 puts "Final members of #{@borneo.tribes.first.name.blue} tribe for last round"
-@merge_tribe.print_members
+@borneo.tribes.first.print_members
 phase_three #7 elminiations become jury members
 puts "\n\nEliminated members after 7 challenges assigned to Jury:"
 @jury.print_members	

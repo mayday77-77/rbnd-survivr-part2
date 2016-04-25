@@ -7,7 +7,7 @@ class Game
 		@tribes << first_tribe << second_tribe
 	end
 
-	def add_tribe(input_tribe)
+	def add_tribe(input_tribe) # this might be wrong?
 		@tribes << input_tribe
 	end
 

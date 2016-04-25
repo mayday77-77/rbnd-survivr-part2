@@ -30,7 +30,7 @@ class Jury
 
 	def announce_winner(input_votes)
 		# Check to see which member has more votes and return the one with more
-		winner = input_votes.to_a.first[1] > input_votes.to_a.last[1] ? input_votes.to_a.first[0] : input_votes.to_a.last[0]
+		winner = input_votes.max_by {| finalist, votes | votes}[0]
 		puts "Survior Game Winner is #{winner}!".yellow
 		return winner
 	end
