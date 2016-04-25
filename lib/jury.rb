@@ -1,4 +1,4 @@
-require_relative "colorizr"
+require 'colorizr'
 class Jury
 
 	attr_accessor :members

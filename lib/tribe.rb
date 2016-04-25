@@ -1,4 +1,4 @@
-require_relative "colorizr"
+require 'colorizr'
 class Tribe
 
 	attr_accessor :name, :members
