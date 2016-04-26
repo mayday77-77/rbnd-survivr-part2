@@ -9,7 +9,7 @@ GEM
   specs:
 
 PLATFORMS
-  ruby
+  x64-mingw32
 
 DEPENDENCIES
   colorizr (= 0.0.2)!
